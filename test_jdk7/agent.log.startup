@@ -1,0 +1,12 @@
+2014-12-04 11:44:02,215 INFO  [Thread-13] [SystemOut] 0 [Thread-13] DEBUG org.hyperic.sigar.ProcFileMirror  - mirror(/proc/net/tcp, /home/opt/antrol-agent-3.0.0-SNAPSHOT/tmp/net/tcp)
+
+2014-12-04 11:44:02,274 INFO  [Thread-13] [SystemOut] 66 [Thread-13] DEBUG org.hyperic.sigar.ProcFileMirror  - mirror(/proc/net/tcp6, /home/opt/antrol-agent-3.0.0-SNAPSHOT/tmp/net/tcp6)
+
+2014-12-04 11:53:55,535 INFO  [FileWatcherThread] [SystemOut] 593229 [FileWatcherThread] DEBUG org.hyperic.sigar.ProcFileMirror  - mirror(/proc/net/tcp, /home/opt/antrol-agent-3.0.0-SNAPSHOT/tmp/net/tcp)
+
+2014-12-04 11:53:55,847 INFO  [FileWatcherThread] [SystemOut] 593638 [FileWatcherThread] DEBUG org.hyperic.sigar.ProcFileMirror  - mirror(/proc/net/tcp6, /home/opt/antrol-agent-3.0.0-SNAPSHOT/tmp/net/tcp6)
+
+2014-12-04 11:58:55,887 INFO  [FileWatcherThread] [SystemOut] 893679 [FileWatcherThread] DEBUG org.hyperic.sigar.ProcFileMirror  - mirror(/proc/net/tcp, /home/opt/antrol-agent-3.0.0-SNAPSHOT/tmp/net/tcp)
+
+2014-12-04 11:58:56,023 INFO  [FileWatcherThread] [SystemOut] 893814 [FileWatcherThread] DEBUG org.hyperic.sigar.ProcFileMirror  - mirror(/proc/net/tcp6, /home/opt/antrol-agent-3.0.0-SNAPSHOT/tmp/net/tcp6)
+

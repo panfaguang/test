@@ -1,0 +1,24 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: test_jar
+Bundle-SymbolicName: test_jar
+Bundle-Version: 3.0.0
+Main-Class: test_jar.TestNetStat
+Export-Package: 
+Bundle-ClassPath: lib/snmp4j-2.1.0.jar
+Import-Package: org.snmp4j,
+ org.snmp4j.asn1,
+ org.snmp4j.event,
+ org.snmp4j.log,
+ org.snmp4j.mp,
+ org.snmp4j.security,
+ org.snmp4j.smi,
+ org.snmp4j.test,
+ org.snmp4j.tools.console,
+ org.snmp4j.transport,
+ org.snmp4j.transport.ssh,
+ org.snmp4j.transport.tls,
+ org.snmp4j.uri,
+ org.snmp4j.util,
+ org.snmp4j.version
+

@@ -1,0 +1,10 @@
+2014-10-29 10:33:28,229 [main           ] INFO  ClassPathXmlApplicationContext - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@33db4f6f: startup date [Wed Oct 29 10:33:28 CST 2014]; root of context hierarchy
+2014-10-29 10:33:28,280 [main           ] INFO  XmlBeanDefinitionReader        - Loading XML bean definitions from class path resource [camelContext.xml]
+2014-10-29 10:33:29,269 [main           ] INFO  DefaultListableBeanFactory     - Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@72813bc1: defining beans [test,ser,jedisPoolConfig,jedisConnectionFactory,redisTemplate,idempotentRepository,template,consumerTemplate,camel:beanPostProcessor,camel]; root of factory hierarchy
+2014-10-29 10:33:29,602 [main           ] INFO  DefaultTypeConverter           - Loaded 172 type converters
+2014-10-29 10:33:29,704 [main           ] INFO  SpringCamelContext             - Apache Camel 2.11.0 (CamelContext: camel) is starting
+2014-10-29 10:33:29,744 [main           ] INFO  ManagementStrategyFactory      - JMX enabled.
+2014-10-29 10:33:35,001 [main           ] INFO  SpringCamelContext             - Route: route1 started and consuming from: Endpoint[spring-redis://192.168.2.41:6379?channels=testChannel&command=SUBSCRIBE]
+2014-10-29 10:33:35,001 [main           ] INFO  ultManagementLifecycleStrategy - Load performance statistics enabled.
+2014-10-29 10:33:35,037 [main           ] INFO  SpringCamelContext             - Total 1 routes, of which 1 is started.
+2014-10-29 10:33:35,042 [main           ] INFO  SpringCamelContext             - Apache Camel 2.11.0 (CamelContext: camel) started in 5.334 seconds

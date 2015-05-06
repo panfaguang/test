@@ -1,0 +1,46 @@
+　select sum(f.phyrds) from v$filestat f, dba_data_files df 　where f.file# = df.file_id and df.tablespace_name = 'EXAMPLE'
+　select f.phyrds pyr,f.phywrts pyw from v$filestat f, dba_data_files df 　where f.file# = df.file_id and df.tablespace_name = 'EXAMPLE'
+　
+监控 SGA 中共享缓存区的命中率，应该小于1%
+select sum(pins) "Total Pins", sum(reloads) "Total Reloads", 
+sum(reloads)/sum(pins) *100 libcache 
+from v$librarycache;
+select sum(pinhits-reloads)/sum(pins) "hit radio",sum(reloads)/sum(pins) "reload percent" 
+from v$librarycache;
+　
+　　select df.tablespace_name name,df.file_name "file",f.phyrds pyr, 　f.phyblkrd pbr,f.phywrts pyw, f.phyblkwrt pbw from v$filestat f, dba_data_files df 　where f.file# = df.file_id order by df.tablespace_name
+　　
+　select * from v$sgainfo 201326592
+　
+　select sum(value) from v$sga
+　
+　
+　select tablespace_name,sqrt(max(blocks)/sum(blocks))* 
+　　(100/sqrt(sqrt(count(blocks)))) FSFI 
+　　from dba_free_space where 
+　　group by tablespace_name having tablespace_name ='example';
+　
+select round((total-free)/total*100,2) pctused from 
+(select 'SGA' name,(select sum(value/1024/1024) from v$sga) total,
+(select sum(bytes/1024/1024) from v$sgastat where name='free memory')free from dual) where name ='SGA'
+　
+select name,total,round(total-free,2) used, round(free,2) free,round((total-free)/total*100,2) pctused from 
+(select 'SGA' name,(select sum(value/1024/1024) from v$sga) total,
+(select sum(bytes/1024/1024) from v$sgastat where name='free memory')free from dual)
+union
+select name,total,round(used,2)used,round(total-used,2)free,round(used/total*100,2)pctused from (
+select 'PGA' name,(select value/1024/1024 total from v$pgastat where name='aggregate PGA target parameter')total,
+(select value/1024/1024 used from v$pgastat where name='total PGA allocated')used from dual);
+　
+　
+　
+　
+　
+　
+SELECT * FROM v$sga_dynamic_components
+　
+select sum(bytes) from v$sgastat 
+共享区库缓存区命中率为  select (sum(pins-reloads)/sum(pins))*100  from v$librarycache
+共享区字典缓存区命中率为 select (sum(gets-getmisses-usage-fixed)/sum(gets))*100 from v$rowcache
+回退段等待次数与获取次数比率 select sum(waits)*100 /sum(gets) from v$rollstat
+磁盘排序与内存排序比率 select (disk.value/mem.value)*100  from v$sysstat mem, v$sysstat disk where mem.name = 'sorts (memory)' and disk.name = 'sorts (disk)'

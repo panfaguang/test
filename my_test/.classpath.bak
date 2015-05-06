@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry kind="lib" path="lib/commons-collections-3.2.1.jar"/>
+	<classpathentry kind="lib" path="lib/commons-io-2.1.jar"/>
+	<classpathentry kind="lib" path="lib/libvirt-0.4.5.jar"/>
+	<classpathentry kind="lib" path="lib/jna.jar"/>
+	<classpathentry kind="lib" path="lib/commons-httpclient-3.1.jar"/>
+	<classpathentry kind="lib" path="lib/snmp4j-2.1.0.jar"/>
+	<classpathentry kind="lib" path="lib/mongo-java-driver-2.10.1.jar"/>
+	<classpathentry kind="lib" path="lib/json-20090211.jar"/>
+	<classpathentry kind="lib" path="E:/repository/commons-pool/commons-pool/1.5.5/commons-pool-1.5.5.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/antrol-util"/>
+	<classpathentry kind="lib" path="E:/repository/org/springframework/data/spring-data-redis/1.0.0.RELEASE/spring-data-redis-1.0.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/jedis-2.0.0.jar"/>
+	<classpathentry kind="lib" path="E:/repository/org/springframework/org.springframework.core/3.0.7.RELEASE/org.springframework.core-3.0.7.RELEASE.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/antrol-redis"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

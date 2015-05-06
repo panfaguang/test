@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Rsrc-Class-Path: ./
+Main-Class: Test
+Class-Path: ./lib/vijava-5.0.0.jar
+

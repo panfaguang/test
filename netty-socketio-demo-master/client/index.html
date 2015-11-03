@@ -31,7 +31,7 @@
 
                 var userName = 'user' + Math.floor((Math.random()*1000)+1);
 
-		var socket =  io.connect('http://localhost:9092/msg_1111');
+		var socket =  io.connect('http://192.168.1.244:9090');
 
 		socket.on('connect', function() {
 			output('<span class="connect-msg">Client has connected to the server!</span>');
@@ -61,9 +61,9 @@
                         // TIP: you can customize type name field
                         // via Configuration.jsonTypeFieldName property
                         
-                        var jsonObject = {userName: userName, 
-                                          message: message};
-                        socket.emit('chatevent', jsonObject);
+                        //var jsonObject = {userName: userName, 
+                         //                 message: message};
+                        socket.emit('chatevent', message);
 		}
 		
 		function output(message) {

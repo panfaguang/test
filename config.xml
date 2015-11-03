@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Licensed to the Apache Software Foundation (ASF) under one or more contributor 
+	license agreements. See the NOTICE file distributed with this work for additional 
+	information regarding copyright ownership. The ASF licenses this file to 
+	You under the Apache License, Version 2.0 (the "License"); you may not use 
+	this file except in compliance with the License. You may obtain a copy of 
+	the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required 
+	by applicable law or agreed to in writing, software distributed under the 
+	License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS 
+	OF ANY KIND, either express or implied. See the License for the specific 
+	language governing permissions and limitations under the License. -->
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0"
+	xmlns:jaxrs="http://cxf.apache.org/blueprint/jaxrs" xmlns:cxf="http://cxf.apache.org/blueprint/core"
+	xsi:schemaLocation="
+	http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
+	http://cxf.apache.or g/blueprint/jaxrs http://cxf.apache.or g/schemas/blueprint/jaxrs.xsd
+	http://cxf.apache.org/blueprint/core http://cxf.apache.org/schemas/blueprint/core.xsd">
+
+	<reference id="xtUserDao" interface="com.antrol.saas.logs.secbase.dao.XtUserDao" />
+	<reference id="activityCodeDao"
+		interface="com.antrol.saas.logs.secbase.dao.ActivityCodeDao" />
+	<reference id="policyDao" interface="com.antrol.saas.logs.secbase.dao.DlPolicyDao" />
+	<reference id="searchService"
+		interface="com.antrol.saas.logs.searcher.service.LogSearcherService" />
+	<reference id="queryRecordDao"
+		interface="com.antrol.saas.logs.secbase.dao.QueryRecordDao" />
+	<reference id="auditLogService"
+		interface="com.antrol.saas.logs.audit.service.AuditLogService" />
+	<reference id="logMetricsDao"
+		interface="com.antrol.saas.logs.secbase.dao.LogMetricsDao" />
+	<reference id="logResourceDao"
+		interface="com.antrol.saas.logs.secbase.dao.LogResourceDao" />
+	<reference id="hazelcastClient"
+		interface="com.antrol.saas.logs.hazelcast.HazelcastClient" />
+	<reference id="oAuthUserDao" interface="com.antrol.saas.logs.secbase.dao.OAuthUserDao" />
+	<reference id="alarmStrategyDao"
+		interface="com.antrol.saas.logs.secbase.dao.AlarmStrategyDao" />
+	<reference id="pushConditionDao"
+		interface="com.antrol.saas.logs.secbase.dao.PushConditionDao" />
+	<reference id="userInvitationCodeDao"
+		interface="com.antrol.saas.logs.secbase.dao.UserInvitationCodeDao" />
+	<reference id="invitationCodeAndUserDao"
+		interface="com.antrol.saas.logs.secbase.dao.InvitationCodeAndUserDao" />
+	<reference id="userExpenseDao"
+		interface="com.antrol.saas.logs.secbase.dao.UserExpenseDao" />
+	<reference id="operationRecordDao"
+		interface="com.antrol.saas.logs.secbase.dao.OperationRecordDao" />
+	<reference id="vipChangeRecordDao"
+		interface="com.antrol.saas.logs.secbase.dao.VIPChangeRecordDao" />
+	<reference id="vipUserDao" interface="com.antrol.saas.logs.secbase.dao.VIPUserDao" />
+	<reference id="vipInfoDao" interface="com.antrol.saas.logs.secbase.dao.VIPInfoDao" />
+	<reference id="vipInvitationCodeDao"
+		interface="com.antrol.saas.logs.secbase.dao.VIPInvitationCodeDao" />
+	<reference id="corporateUserDao"
+		interface="com.antrol.saas.logs.secbase.dao.CorporateUserDao" />
+	<reference id="userLogTypeDao"
+		interface="com.antrol.saas.logs.secbase.dao.UserLogTypeDao" />
+	<reference id="dashBoardDao"
+		interface="com.antrol.saas.logs.secbase.dao.DashBoardDao" />
+	<reference id="dashBoardLastVisitDao"
+		interface="com.antrol.saas.logs.secbase.dao.DashBoardLastVisitDao" />
+	<reference id="dashBoardWidgetDao"
+		interface="com.antrol.saas.logs.secbase.dao.DashBoardWidgetDao" />
+
+	<reference id="noticeAlarmDao"
+		interface="com.antrol.saas.logs.secbase.dao.NoticeAlarmDao" />
+	<reference id="alarmDao"
+		interface="com.antrol.saas.logs.secbase.dao.AlarmDao" />
+	<reference id="systemNoticeDao" 
+		interface="com.antrol.saas.logs.secbase.dao.SystemNoticeDao" />
+
+	<reference id="hostAppNameDao"
+		interface="com.antrol.saas.logs.secbase.dao.HostAppNameDao" />
+	<reference id="logWordCountService"
+		interface="com.antrol.saas.logs.cbase.service.LogWordCountService" />
+
+	<reference id="dashBoardKeyWordDao"
+		interface="com.antrol.saas.logs.secbase.dao.DashBoardkeyWordDao" />
+		
+	<bean id="authClient" class="com.antrol.saas.logs.auth.client.impl.AuthClientImpl">
+	</bean>
+	<service ref="authClient" interface="com.antrol.saas.logs.auth.client.AuthClient" />
+	<bean id="auditService" class="com.antrol.saas.logs.rest.impl.AuditServiceImpl">
+		<property name="auditLogService" ref="auditLogService" />
+		<property name="userDao" ref="xtUserDao" />
+	</bean>
+	<service ref="authService" interface="com.antrol.saas.logs.rest.AuthService" />
+	<bean id="authService" class="com.antrol.saas.logs.rest.impl.AuthServiceImpl"
+		init-method="init">
+		<property name="auditLogService" ref="auditLogService" />
+		<property name="client" ref="authClient" />
+		<property name="userDao" ref="xtUserDao" />
+		<property name="hazelcastClient" ref="hazelcastClient" />
+		<property name="activityCodeDao" ref="activityCodeDao" />
+		<property name="userInvitationCodeDao" ref="userInvitationCodeDao" />
+		<property name="invitationCodeAndUserDao" ref="invitationCodeAndUserDao" />
+		<property name="vipInfoDao" ref="vipInfoDao" />
+		<property name="vipInvitationCodeDao" ref="vipInvitationCodeDao" />
+		<property name="corporateUserDao" ref="corporateUserDao" />
+		<property name="vipUserDao" ref="vipUserDao" />
+		<property name="vipService" ref="vipService" />
+	</bean>
+	<bean id="logSearch" class="com.antrol.saas.logs.rest.impl.LogSearchImpl">
+		<property name="searcher" ref="searchService" />
+		<property name="hazelcastClient" ref="hazelcastClient" />
+		<property name="auditLogService" ref="auditLogService" />
+	</bean>
+	<bean id="userService" class="com.antrol.saas.logs.rest.impl.UserServiceImpl">
+		<property name="auditLogService" ref="auditLogService" />
+		<property name="client" ref="authClient" />
+		<property name="userDao" ref="xtUserDao" />
+		<property name="hazelcastClient" ref="hazelcastClient" />
+	</bean>
+	<bean id="manageService" class="com.antrol.saas.logs.rest.impl.ManageServiceImpl">
+		<property name="logMetricsDao" ref="logMetricsDao" />
+		<property name="client" ref="authClient" />
+		<property name="userDao" ref="xtUserDao" />
+		<property name="hazelcastClient" ref="hazelcastClient" />
+		<property name="auditLogService" ref="auditLogService" />
+		<property name="vipUserDao" ref="vipUserDao" />
+		<property name="systemNoticeDao" ref="systemNoticeDao" />
+	</bean>
+	<bean id="queryRecordService" class="com.antrol.saas.logs.rest.impl.QueryRecordServiceImpl">
+		<property name="queryRecordDao" ref="queryRecordDao" />
+		<property name="hazelcastClient" ref="hazelcastClient" />
+		<property name="auditLogService" ref="auditLogService" />
+	</bean>
+	<bean id="resourceService" class="com.antrol.saas.logs.rest.impl.ResourceServiceImpl">
+		<property name="logResourceDao" ref="logResourceDao" />
+		<property name="hazelcastClient" ref="hazelcastClient" />
+		<property name="auditLogService" ref="auditLogService" />
+	</bean>
+	<bean id="oAuthLoginService" class="com.antrol.saas.logs.rest.impl.OAuthLoginServiceImpl">
+		<property name="hazelcastClient" ref="hazelcastClient" />
+		<property name="authService" ref="authService" />
+		<property name="client" ref="authClient" />
+		<property name="userDao" ref="xtUserDao" />
+		<property name="oAuthUserDao" ref="oAuthUserDao" />
+		<property name="userInvitationCodeDao" ref="userInvitationCodeDao" />
+		<property name="invitationCodeAndUserDao" ref="invitationCodeAndUserDao" />
+	</bean>
+	<bean id="pushService" class="com.antrol.saas.logs.rest.impl.PushServiceImpl">
+		<property name="hazelcastClient" ref="hazelcastClient" />
+		<property name="pushDao" ref="pushConditionDao" />
+	</bean>
+	<bean id="policyService" class="com.antrol.saas.logs.rest.impl.PolicyServiceImpl">
+		<property name="hazelcastClient" ref="hazelcastClient" />
+		<property name="alarmStrategyDao" ref="alarmStrategyDao" />
+		<property name="auditLogService" ref="auditLogService" />
+	</bean>
+	<bean id="userInvitationCodeService"
+		class="com.antrol.saas.logs.rest.impl.UserInvitationCodeServiceImpl">
+		<property name="hazelcastClient" ref="hazelcastClient" />
+		<property name="invitationCodeAndUserDao" ref="invitationCodeAndUserDao" />
+		<property name="userInvitationCodeDao" ref="userInvitationCodeDao" />
+		<property name="userDao" ref="xtUserDao" />
+		<property name="userExpenseDao" ref="userExpenseDao" />
+		<property name="operationRecordDao" ref="operationRecordDao" />
+	</bean>
+	<bean id="userExpenseService" class="com.antrol.saas.logs.rest.impl.UserExpenseServiceImpl"
+		init-method="start">
+		<property name="hazelcastClient" ref="hazelcastClient" />
+		<property name="invitationCodeAndUserDao" ref="invitationCodeAndUserDao" />
+		<property name="userInvitationCodeDao" ref="userInvitationCodeDao" />
+		<property name="userDao" ref="xtUserDao" />
+		<property name="userExpenseDao" ref="userExpenseDao" />
+		<property name="operationRecordDao" ref="operationRecordDao" />
+	</bean>
+	<bean id="emailService" class="com.antrol.saas.logs.rest.impl.EmailServiceImpl">
+		<property name="hazelcastClient" ref="hazelcastClient" />
+	</bean>
+	<bean id="logDemoService" class="com.antrol.saas.logs.rest.impl.LogDemoServiceImpl"
+		init-method="init">
+	</bean>
+	<bean id="dashBoardService" class="com.antrol.saas.logs.rest.impl.DashBoardServiceImpl"
+		init-method="init">
+		<property name="dashBoardDao" ref="dashBoardDao"/>
+		<property name="dashBoardWidgetDao" ref="dashBoardWidgetDao"/>
+		<property name="hazelcastClient" ref="hazelcastClient" />
+	</bean>
+	<bean id="dashBoardWidgetService" 
+		class="com.antrol.saas.logs.rest.impl.DashBoardWidgetServiceImpl" init-method="init">
+		<property name="dashBoardWidgetDao" ref="dashBoardWidgetDao"/>
+		<property name="dashBoardDao" ref="dashBoardDao"/>
+		<property name="dashBoardKeyWordDao" ref="dashBoardKeyWordDao" />
+		<property name="hazelcastClient" ref="hazelcastClient" />
+	</bean>
+	<bean id="dashBoardWidgetViewService"
+		class="com.antrol.saas.logs.rest.impl.DashBoardWidgetViewServiceImpl" >
+		<property name="dashBoardWidgetDao" ref="dashBoardWidgetDao"/>
+		<property name="searcher" ref="searchService" />
+		<property name="logWordCountService" ref="logWordCountService"/>
+		<property name="hazelcastClient" ref="hazelcastClient" />
+		<property name="hostAppNameDao" ref="hostAppNameDao" />
+	</bean>
+	<bean id="dashBoardLastVisitService" 
+		class="com.antrol.saas.logs.rest.impl.DashBoardLastVisitServiceImpl">
+		<property name="dashBoardLastVisitDao" ref="dashBoardLastVisitDao"/>
+	</bean>
+	<bean id="logTypeService" class="com.antrol.saas.logs.rest.impl.LogTypeServiceImpl"
+		init-method="start">
+	</bean>
+	<bean id="hazelcastListenerInit"
+		class="com.antrol.saas.logs.hazelcast.listener.HazelcastListenerInit"
+		init-method="start">
+		<property name="client" ref="hazelcastClient" />
+	</bean>
+	<service ref="vipService" interface="com.antrol.saas.logs.rest.VIPService" />
+	<bean id="vipService" class="com.antrol.saas.logs.rest.impl.VIPServiceImpl"
+		init-method="init">
+		<property name="userDao" ref="xtUserDao" />
+		<property name="vipChangeRecordDao" ref="vipChangeRecordDao" />
+		<property name="vipUserDao" ref="vipUserDao" />
+		<property name="vipInfoDao" ref="vipInfoDao" />
+		<property name="hazelcastClient" ref="hazelcastClient" />
+		<property name="vipInvitationCodeDao" ref="vipInvitationCodeDao" />
+		<property name="corporateUserDao" ref="corporateUserDao" />
+	</bean>
+	<bean id="vipInvitationCodeService"
+		class="com.antrol.saas.logs.rest.impl.VIPInvitationCodeServiceImpl">
+		<property name="hazelcastClient" ref="hazelcastClient" />
+		<property name="vipInvitationCodeDao" ref="vipInvitationCodeDao" />
+	</bean>
+	<bean id="userLogTypeService" class="com.antrol.saas.logs.rest.impl.UserLogTypeServiceImpl">
+		<property name="hazelcastClient" ref="hazelcastClient" />
+		<property name="userLogTypeDao" ref="userLogTypeDao" />
+	</bean>
+	<service ref="noticeAlarmService" interface="com.antrol.saas.logs.rest.NoticeAlarmService" />
+	<bean id="noticeAlarmService"
+		class="com.antrol.saas.logs.rest.impl.NoticeAlarmServiceImpl">
+		<property name="systemNoticeDao" ref="systemNoticeDao" />
+		<property name="alarmDao" ref="alarmDao" />
+		<property name="noticeAlarmDao" ref="noticeAlarmDao"/>
+		<property name="hazelcastClient" ref="hazelcastClient" />
+	</bean>
+	<bean id="hostAppNameService"
+		class="com.antrol.saas.logs.rest.impl.HostAppNameServiceImpl">
+			<property name="hazelcastClient" ref="hazelcastClient" />
+			<property name="hostAppNameDao" ref="hostAppNameDao" />
+	</bean>
+	<jaxrs:server id="rest-service" address="/">
+		<jaxrs:serviceBeans>
+			<ref component-id="auditService" />
+			<ref component-id="oAuthLoginService" />
+			<ref component-id="authService" />
+			<ref component-id="logSearch" />
+			<ref component-id="policyService" />
+			<ref component-id="userService" />
+			<ref component-id="manageService" />
+			<ref component-id="queryRecordService" />
+			<ref component-id="resourceService" />
+			<ref component-id="pushService" />
+			<ref component-id="userInvitationCodeService" />
+			<ref component-id="emailService" />
+			<ref component-id="userExpenseService" />
+			<ref component-id="logDemoService" />
+			<ref component-id="vipService" />
+			<ref component-id="vipInvitationCodeService" />
+			<ref component-id="userLogTypeService" />
+			<ref component-id="dashBoardService" />
+			<ref component-id="dashBoardWidgetService" />
+			<ref component-id="dashBoardLastVisitService" />
+			<ref component-id="dashBoardWidgetViewService" />
+			<ref component-id="logTypeService" />
+			<ref component-id="hostAppNameService" />
+			<ref component-id="noticeAlarmService" />
+		</jaxrs:serviceBeans>
+
+		<jaxrs:providers>
+			<bean class="org.codehaus.jackson.jaxrs.JacksonJsonProvider" />
+			<!-- 新加 -->
+			<bean class="com.antrol.saas.logs.rest.filter.RestFilter">
+				<property name="hazelcastClient" ref="hazelcastClient" />
+			</bean>
+
+		</jaxrs:providers>
+	</jaxrs:server>
+
+</blueprint>
